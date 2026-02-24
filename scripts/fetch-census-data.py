@@ -377,10 +377,10 @@ CITY_PUZZLES = [
         "hints": ["Located in the Mountain West", "State capital", "About 340 miles from Salt Lake City", "Starts with B", "County: Ada County"]
     },
     {
-        "answer": "Miami, FL",
-        "lat": 25.7617, "lng": -80.1918,
-        "state_fips": "12", "place_fips": "45000",
-        "hints": ["Located in the Southeast", "Coastal city in a peninsula state", "About 1,280 miles from New York City", "Starts with M", "County: Miami-Dade County"]
+        "answer": "Charlotte, NC",
+        "lat": 35.2271, "lng": -80.8431,
+        "state_fips": "37", "place_fips": "12000",
+        "hints": ["Located in the Southeast", "Major US banking center", "About 245 miles from Atlanta", "Starts with C", "County: Mecklenburg County"]
     },
     {
         "answer": "Minneapolis, MN",
@@ -461,10 +461,10 @@ CITY_PUZZLES = [
         "hints": ["Located in the Great Lakes region", "Historically known as the Motor City", "About 280 miles from Chicago", "Starts with D", "County: Wayne County"]
     },
     {
-        "answer": "Charlotte, NC",
-        "lat": 35.2271, "lng": -80.8431,
-        "state_fips": "37", "place_fips": "12000",
-        "hints": ["Located in the Southeast", "Major US banking center", "About 245 miles from Atlanta", "Starts with C", "County: Mecklenburg County"]
+        "answer": "Miami, FL",
+        "lat": 25.7617, "lng": -80.1918,
+        "state_fips": "12", "place_fips": "45000",
+        "hints": ["Located in the Southeast", "Coastal city in a peninsula state", "About 1,280 miles from New York City", "Starts with M", "County: Miami-Dade County"]
     },
     {
         "answer": "Austin, TX",

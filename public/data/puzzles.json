@@ -201,52 +201,52 @@
   {
     "id": 4,
     "mode": "cityfinder",
-    "answer": "Miami, FL",
-    "lat": 25.7617,
-    "lng": -80.1918,
+    "answer": "Charlotte, NC",
+    "lat": 35.2271,
+    "lng": -80.8431,
     "stats": {
-      "populationRange": "400,000 - 500,000",
+      "populationRange": "500,000+",
       "populationGrowth": "N/A",
       "topEthnicities": [
         {
-          "label": "Hispanic",
-          "percent": 72.3
+          "label": "White (non-Hispanic)",
+          "percent": 39.7
         },
         {
           "label": "Black",
-          "percent": 14.1
+          "percent": 35.2
         },
         {
-          "label": "White (non-Hispanic)",
-          "percent": 11.9
+          "label": "Hispanic",
+          "percent": 15.3
         },
         {
           "label": "Asian",
-          "percent": 1.5
+          "percent": 6.6
         }
       ],
       "topLanguages": [
         {
           "label": "Spanish",
-          "percent": 70.0
-        },
-        {
-          "label": "French/Haitian/Cajun",
-          "percent": 4.0
+          "percent": 13.1
         },
         {
           "label": "Other Indo-European",
-          "percent": 1.8
+          "percent": 2.2
+        },
+        {
+          "label": "Other Asian/Pacific Island",
+          "percent": 2.1
         }
       ],
-      "medianAge": 39.7
+      "medianAge": 34.5
     },
     "hints": [
       "Located in the Southeast",
-      "Coastal city in a peninsula state",
-      "About 1,280 miles from New York City",
-      "Starts with M",
-      "County: Miami-Dade County"
+      "Major US banking center",
+      "About 245 miles from Atlanta",
+      "Starts with C",
+      "County: Mecklenburg County"
     ]
   },
   {
@@ -1908,52 +1908,52 @@
   {
     "id": 31,
     "mode": "cityfinder",
-    "answer": "Charlotte, NC",
-    "lat": 35.2271,
-    "lng": -80.8431,
+    "answer": "Miami, FL",
+    "lat": 25.7617,
+    "lng": -80.1918,
     "stats": {
-      "populationRange": "500,000+",
+      "populationRange": "400,000 - 500,000",
       "populationGrowth": "N/A",
       "topEthnicities": [
         {
-          "label": "White (non-Hispanic)",
-          "percent": 39.7
+          "label": "Hispanic",
+          "percent": 72.3
         },
         {
           "label": "Black",
-          "percent": 35.2
+          "percent": 14.1
         },
         {
-          "label": "Hispanic",
-          "percent": 15.3
+          "label": "White (non-Hispanic)",
+          "percent": 11.9
         },
         {
           "label": "Asian",
-          "percent": 6.6
+          "percent": 1.5
         }
       ],
       "topLanguages": [
         {
           "label": "Spanish",
-          "percent": 13.1
+          "percent": 70.0
+        },
+        {
+          "label": "French/Haitian/Cajun",
+          "percent": 4.0
         },
         {
           "label": "Other Indo-European",
-          "percent": 2.2
-        },
-        {
-          "label": "Other Asian/Pacific Island",
-          "percent": 2.1
+          "percent": 1.8
         }
       ],
-      "medianAge": 34.5
+      "medianAge": 39.7
     },
     "hints": [
       "Located in the Southeast",
-      "Major US banking center",
-      "About 245 miles from Atlanta",
-      "Starts with C",
-      "County: Mecklenburg County"
+      "Coastal city in a peninsula state",
+      "About 1,280 miles from New York City",
+      "Starts with M",
+      "County: Miami-Dade County"
     ]
   },
   {
