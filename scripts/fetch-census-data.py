@@ -688,10 +688,13 @@ def fetch_city_demographics(state_fips, place_fips):
     ethnicities.sort(key=lambda x: x["percent"], reverse=True)
     ethnicities = ethnicities[:4]
 
-    # Population range (round to nearest 10k)
-    lower = (total_pop // 10000) * 10000
-    upper = lower + 10000
-    pop_range = f"{lower:,} - {upper:,}"
+    # Population range (100k buckets, then 500k+)
+    if total_pop >= 500000:
+        pop_range = "500,000+"
+    else:
+        lower = (total_pop // 100000) * 100000
+        upper = lower + 100000
+        pop_range = f"{lower:,} - {upper:,}"
 
     # Language data using C16001 (collapsed language table, available at place level)
     lang_url = (
