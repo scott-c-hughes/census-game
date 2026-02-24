@@ -1,7 +1,7 @@
 import { StateCode } from "./types";
 
 // Launch date for puzzle ID calculation
-export const LAUNCH_DATE = "2026-02-23";
+export const LAUNCH_DATE = "2026-02-21";
 
 // Max guesses per game
 export const MAX_GUESSES = 6;
