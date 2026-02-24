@@ -8,16 +8,17 @@ import {
 import { LAUNCH_DATE, DISTANCE_GREEN, DISTANCE_YELLOW, SIMILARITY_GROUPS } from "./constants";
 import { haversineDistance } from "./geography";
 
-// Calculate today's puzzle ID (deterministic, same for everyone)
-export function getDailyPuzzleId(totalPuzzles: number, dateOverride?: string): number {
-  const launch = new Date(LAUNCH_DATE + "T00:00:00Z");
-  const today = dateOverride
-    ? new Date(dateOverride + "T00:00:00Z")
-    : new Date();
+// Get current date string in Eastern time (America/New_York)
+function easternDateStr(dateOverride?: string): string {
+  if (dateOverride) return dateOverride;
+  return new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
+}
 
-  // Use UTC to ensure consistency
-  const launchDay = Math.floor(launch.getTime() / 86400000);
-  const todayDay = Math.floor(today.getTime() / 86400000);
+// Calculate today's puzzle ID (resets at midnight Eastern)
+export function getDailyPuzzleId(totalPuzzles: number, dateOverride?: string): number {
+  const launchDay = Math.floor(new Date(LAUNCH_DATE + "T00:00:00").getTime() / 86400000);
+  const todayStr = easternDateStr(dateOverride);
+  const todayDay = Math.floor(new Date(todayStr + "T00:00:00").getTime() / 86400000);
   const daysSince = todayDay - launchDay;
 
   return (daysSince % totalPuzzles) + 1;

@@ -1,13 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 
-// Returns time remaining until midnight UTC as "HH:MM:SS"
+// Returns time remaining until midnight Eastern as "HH:MM:SS"
 export function useCountdown(): string {
-  const [timeLeft, setTimeLeft] = useState(getTimeUntilMidnightUTC());
+  const [timeLeft, setTimeLeft] = useState(getTimeUntilMidnightET());
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeLeft(getTimeUntilMidnightUTC());
+      setTimeLeft(getTimeUntilMidnightET());
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -15,15 +15,21 @@ export function useCountdown(): string {
   return timeLeft;
 }
 
-function getTimeUntilMidnightUTC(): string {
+function getTimeUntilMidnightET(): string {
   const now = new Date();
-  const tomorrow = new Date(Date.UTC(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate() + 1,
-    0, 0, 0
-  ));
-  const diff = tomorrow.getTime() - now.getTime();
+
+  // Get tomorrow's date in Eastern time
+  const eastern = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+  eastern.setDate(eastern.getDate() + 1);
+  eastern.setHours(0, 0, 0, 0);
+
+  // Convert that Eastern midnight back to a UTC timestamp
+  // by finding the offset between local-interpreted Eastern and real now
+  const nowEastern = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+  const offsetMs = now.getTime() - nowEastern.getTime();
+  const midnightUtc = eastern.getTime() + offsetMs;
+
+  const diff = midnightUtc - now.getTime();
 
   const hours = Math.floor(diff / 3600000);
   const minutes = Math.floor((diff % 3600000) / 60000);
