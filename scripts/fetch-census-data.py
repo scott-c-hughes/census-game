@@ -14,9 +14,10 @@ Usage: python3 scripts/fetch-census-data.py
 import json
 import urllib.request
 import sys
+import time
 
-YEAR = "2023"
-BASE = f"https://api.census.gov/data/{YEAR}/acs/acs1"
+YEAR = "2022"
+BASE = f"https://api.census.gov/data/{YEAR}/acs/acs5"
 
 # FIPS -> state code mapping
 FIPS_TO_STATE = {
@@ -522,11 +523,21 @@ CITY_PUZZLES = [
 ]
 
 
-def fetch_json(url):
-    """Fetch JSON from a URL."""
-    req = urllib.request.Request(url)
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.loads(resp.read().decode())
+def fetch_json(url, retries=3):
+    """Fetch JSON from a URL with retry logic."""
+    for attempt in range(retries):
+        try:
+            time.sleep(0.5)  # rate-limit ourselves
+            req = urllib.request.Request(url)
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                return json.loads(resp.read().decode())
+        except urllib.error.HTTPError as e:
+            if e.code == 503 and attempt < retries - 1:
+                wait = 3 * (attempt + 1)
+                print(f"  503 error, retrying in {wait}s...", file=sys.stderr)
+                time.sleep(wait)
+            else:
+                raise
 
 
 def fetch_ancestry_state_data(var_code):
@@ -545,14 +556,12 @@ def fetch_ancestry_state_data(var_code):
         state = FIPS_TO_STATE.get(fips)
         if not state:
             continue
-        total = row[total_idx]
-        value = row[var_idx]
-        if total is None or value is None:
-            continue
-        total = int(total)
-        value = int(value)
+        total = safe_int(row[total_idx])
+        value = safe_int(row[var_idx])
         if total > 0:
             result[state] = round(value / total, 4)
+        else:
+            result[state] = 0.0
     return result
 
 
@@ -572,14 +581,12 @@ def fetch_language_state_data(var_code):
         state = FIPS_TO_STATE.get(fips)
         if not state:
             continue
-        total = row[total_idx]
-        value = row[var_idx]
-        if total is None or value is None:
-            continue
-        total = int(total)
-        value = int(value)
+        total = safe_int(row[total_idx])
+        value = safe_int(row[var_idx])
         if total > 0:
             result[state] = round(value / total, 4)
+        else:
+            result[state] = 0.0
     return result
 
 
