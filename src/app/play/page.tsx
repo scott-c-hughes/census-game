@@ -116,18 +116,12 @@ function PlayContent() {
               />
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <GuessHistory
-                guesses={gameState.guesses}
-                mode="cityfinder"
-                answerLat={(puzzle as CityFinderPuzzle).lat}
-                answerLng={(puzzle as CityFinderPuzzle).lng}
-              />
-              <HintPanel
-                hints={[...puzzle.hints]}
-                hintsRevealed={gameState.hintsRevealed}
-              />
-            </div>
+            <GuessHistory
+              guesses={gameState.guesses}
+              mode="cityfinder"
+              answerLat={(puzzle as CityFinderPuzzle).lat}
+              answerLng={(puzzle as CityFinderPuzzle).lng}
+            />
           </>
         )}
 
