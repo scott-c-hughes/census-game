@@ -40,7 +40,7 @@ export function generateShareText(
     "",
     emojiRows,
     "",
-    "census-game.vercel.app",
+    "https://census-game.vercel.app",
   ].join("\n");
 }
 
@@ -75,17 +75,8 @@ function guessToEmoji(
   }
 }
 
-// Copy to clipboard with fallback
-export async function copyToClipboard(text: string): Promise<boolean> {
-  try {
-    if (navigator.share) {
-      await navigator.share({ text });
-      return true;
-    }
-  } catch {
-    // share cancelled or not supported, fall through to clipboard
-  }
-
+// Copy text to clipboard only
+export async function copyTextToClipboard(text: string): Promise<boolean> {
   try {
     await navigator.clipboard.writeText(text);
     return true;
@@ -105,5 +96,18 @@ export async function copyToClipboard(text: string): Promise<boolean> {
     } finally {
       document.body.removeChild(textarea);
     }
+  }
+}
+
+// Native OS share sheet
+export async function nativeShare(text: string): Promise<boolean> {
+  try {
+    if (navigator.share) {
+      await navigator.share({ text });
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
   }
 }
