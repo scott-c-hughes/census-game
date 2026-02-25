@@ -32,6 +32,7 @@ export interface CityFinderPuzzle {
 
 export interface CityStats {
   populationRange: string;     // e.g. "200,000 - 250,000"
+  population: number;          // exact population, revealed after 3rd guess
   populationGrowth: string;    // e.g. "+9.3%"
   topEthnicities: EthnicityBar[];
   topLanguages: LanguageBar[];

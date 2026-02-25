@@ -111,7 +111,7 @@ function PlayContent() {
               </p>
             </div>
 
-            <StatsPanel stats={(puzzle as CityFinderPuzzle).stats} />
+            <StatsPanel stats={(puzzle as CityFinderPuzzle).stats} guessCount={gameState.guesses.length} />
             <p className="text-center text-xs text-gray-400 -mt-3">
               Source: U.S. Census Bureau, 2024 American Community Survey
             </p>

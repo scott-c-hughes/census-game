@@ -3,9 +3,29 @@ import { CityStats } from "@/lib/types";
 
 interface StatsPanelProps {
   stats: CityStats;
+  guessCount: number;
 }
 
-export default function StatsPanel({ stats }: StatsPanelProps) {
+function formatPopulation(population: number, guessCount: number, populationRange: string): string {
+  if (population >= 500_000) {
+    if (guessCount === 0) {
+      // 500k buckets: "500,000 - 1,000,000"
+      const lower = Math.floor(population / 500_000) * 500_000;
+      return `${lower.toLocaleString()} - ${(lower + 500_000).toLocaleString()}`;
+    }
+    if (guessCount < 3) {
+      // 100k buckets: "700,000 - 800,000"
+      const lower = Math.floor(population / 100_000) * 100_000;
+      return `${lower.toLocaleString()} - ${(lower + 100_000).toLocaleString()}`;
+    }
+    return population.toLocaleString();
+  }
+
+  // Under 500k: show range until 3rd guess, then exact
+  return guessCount >= 3 ? population.toLocaleString() : populationRange;
+}
+
+export default function StatsPanel({ stats, guessCount }: StatsPanelProps) {
   const growthNum = parseFloat(stats.populationGrowth);
   const hasGrowth = !isNaN(growthNum);
   const growthPositive = growthNum > 0;
@@ -19,7 +39,9 @@ export default function StatsPanel({ stats }: StatsPanelProps) {
       <div className="flex items-baseline justify-between">
         <div>
           <span className="text-xs text-gray-400">Population</span>
-          <p className="text-lg font-bold text-gray-900">{stats.populationRange}</p>
+          <p className="text-lg font-bold text-gray-900">
+            {formatPopulation(stats.population, guessCount, stats.populationRange)}
+          </p>
         </div>
         {hasGrowth && (
           <div className="text-right">
