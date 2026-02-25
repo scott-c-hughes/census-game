@@ -1,37 +1,77 @@
 import { GuessEntry, HeatmapGuessResult, CityGuessResult } from "./types";
+import { directionArrow } from "./geography";
 
 // Generate emoji share text
 export function generateShareText(
   puzzleId: number,
   guesses: GuessEntry[],
   didWin: boolean,
-  maxGuesses: number
+  maxGuesses: number,
+  mode: "heatmap" | "cityfinder",
+  answerLat?: number,
+  answerLng?: number
 ): string {
   const guessCount = didWin ? guesses.length : "X";
-  const emojiRows = guesses.map((g) => guessToEmoji(g)).join("");
+  const modeIcon = mode === "heatmap" ? "🗺️" : "📍";
+
+  let emojiRows: string;
+
+  if (mode === "heatmap") {
+    emojiRows = guesses
+      .map((g) => guessToEmoji(g, mode))
+      .join("");
+  } else {
+    const colors: string[] = [];
+    const arrows: string[] = [];
+    for (const g of guesses) {
+      const r = g.result as CityGuessResult;
+      colors.push(r.rating === "green" ? "🟩" : r.rating === "yellow" ? "🟨" : "🟥");
+      if (r.rating === "green") {
+        arrows.push("📍");
+      } else if (answerLat !== undefined && answerLng !== undefined) {
+        arrows.push(directionArrow(r.lat, r.lng, answerLat, answerLng));
+      }
+    }
+    emojiRows = colors.join("") + "\n" + arrows.join("");
+  }
 
   return [
-    `CENSUS #${puzzleId} ${guessCount}/${maxGuesses}`,
+    `CENSUS #${puzzleId} ${modeIcon} ${guessCount}/${maxGuesses}`,
     "",
     emojiRows,
     "",
-    "https://census-game.vercel.app",
+    "census-game.vercel.app",
   ].join("\n");
 }
 
-function guessToEmoji(guess: GuessEntry): string {
+function guessToEmoji(
+  guess: GuessEntry,
+  mode: "heatmap" | "cityfinder",
+  answerLat?: number,
+  answerLng?: number
+): string {
   if (typeof guess.result === "string") {
     // Heatmap mode
     const r = guess.result as HeatmapGuessResult;
-    if (r === "correct") return "\uD83D\uDFE9";
-    if (r === "close") return "\uD83D\uDFE8";
-    return "\uD83D\uDFE5";
+    if (r === "correct") return "🟩";
+    if (r === "close") return "🟨";
+    return "🟥";
   } else {
     // City finder mode
     const r = guess.result as CityGuessResult;
-    if (r.rating === "green") return "\uD83D\uDFE9";
-    if (r.rating === "yellow") return "\uD83D\uDFE8";
-    return "\uD83D\uDFE5";
+    const color = r.rating === "green" ? "🟩" : r.rating === "yellow" ? "🟨" : "🟥";
+
+    if (r.rating === "green") {
+      return `${color} 📍`;
+    }
+
+    // Add direction arrow showing which way the answer is
+    if (answerLat !== undefined && answerLng !== undefined) {
+      const arrow = directionArrow(r.lat, r.lng, answerLat, answerLng);
+      return `${color} ${arrow}`;
+    }
+
+    return color;
   }
 }
 

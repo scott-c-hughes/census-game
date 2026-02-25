@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useGameState } from "@/hooks/useGameState";
 import {
   HeatmapPuzzle,
@@ -32,6 +32,14 @@ function PlayContent() {
   const [showResults, setShowResults] = useState(false);
 
   const isComplete = gameState?.isComplete ?? false;
+
+  // Auto-show results modal after completing the puzzle
+  useEffect(() => {
+    if (isComplete) {
+      const timer = setTimeout(() => setShowResults(true), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [isComplete]);
 
   if (loading) {
     return (

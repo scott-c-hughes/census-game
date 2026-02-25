@@ -83,7 +83,7 @@ export default function ResultsModal({
 
         <div className="flex flex-col items-center gap-4 pt-2">
           <ShareButton
-            puzzleId={puzzle.id}
+            puzzle={puzzle}
             guesses={guesses}
             didWin={didWin}
           />
