@@ -35,6 +35,7 @@ export interface CityStats {
   populationGrowth: string;    // e.g. "+9.3%"
   topEthnicities: EthnicityBar[];
   topLanguages: LanguageBar[];
+  topAncestries: AncestryBar[];
   medianAge: number;
 }
 
@@ -44,6 +45,11 @@ export interface EthnicityBar {
 }
 
 export interface LanguageBar {
+  label: string;
+  percent: number;
+}
+
+export interface AncestryBar {
   label: string;
   percent: number;
 }

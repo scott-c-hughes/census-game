@@ -89,6 +89,32 @@ export default function StatsPanel({ stats }: StatsPanelProps) {
           </div>
         </div>
       )}
+
+      {stats.topAncestries?.length > 0 && (
+        <div>
+          <span className="text-xs text-gray-400 block mb-2">
+            Top Ancestries
+          </span>
+          <div className="space-y-1.5">
+            {stats.topAncestries.map((a) => (
+              <div key={a.label} className="flex items-center gap-2">
+                <span className="text-xs text-gray-500 w-28 truncate">
+                  {a.label}
+                </span>
+                <div className="flex-1 bg-gray-200 rounded-full h-3 overflow-hidden">
+                  <div
+                    className="bg-amber-500 h-full rounded-full transition-all"
+                    style={{ width: `${Math.min(a.percent * 2, 100)}%` }}
+                  />
+                </div>
+                <span className="text-xs text-gray-500 w-10 text-right">
+                  {a.percent}%
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
