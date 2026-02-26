@@ -8,6 +8,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://census-game.vercel.app"),
   title: "CENSUS - Daily US Census Data Quiz",
   description:
     "A daily quiz game using real US Census data. Guess the ancestry from a heatmap or find a city from its demographics. One puzzle per day, 6 guesses.",
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
       "Can you guess the ancestry from a US heatmap? Or find a city from its demographics? Play the daily Census quiz!",
     type: "website",
     url: "https://census-game.vercel.app",
+    siteName: "CENSUS",
   },
   twitter: {
     card: "summary_large_image",

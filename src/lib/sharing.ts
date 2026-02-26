@@ -40,7 +40,7 @@ export function generateShareText(
     "",
     emojiRows,
     "",
-    "🎯 Play at census-game.vercel.app",
+    "https://census-game.vercel.app",
   ].join("\n");
 }
 
