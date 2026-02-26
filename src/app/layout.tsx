@@ -9,22 +9,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://census-game.vercel.app"),
-  title: "CENSUS - Daily US Census Data Quiz",
-  description:
-    "A daily quiz game using real US Census data. Guess the ancestry from a heatmap or find a city from its demographics. One puzzle per day, 6 guesses.",
+  title: "CENSUS",
+  description: "Daily US Census Data Quiz",
   openGraph: {
-    title: "CENSUS - Daily US Census Data Quiz",
-    description:
-      "Can you guess the ancestry from a US heatmap? Or find a city from its demographics? Play the daily Census quiz!",
+    title: "CENSUS",
+    description: "Daily US Census Data Quiz",
     type: "website",
     url: "https://census-game.vercel.app",
     siteName: "CENSUS",
   },
   twitter: {
-    card: "summary_large_image",
-    title: "CENSUS - Daily US Census Data Quiz",
-    description:
-      "A Wordle-style daily quiz using real US Census data. How well do you know America?",
+    card: "summary",
+    title: "CENSUS",
+    description: "Daily US Census Data Quiz",
   },
 };
 
